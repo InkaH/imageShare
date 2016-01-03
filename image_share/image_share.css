@@ -1,0 +1,22 @@
+.thumbnail{
+	height:500px;
+}
+
+.thumbnail-img{
+	max-height:300px;
+}
+
+/*the star rating plugin doesn't work 
+with images whose id starts with a digit
+so let's add it without using the id selector*/
+.star-glyph:before{  
+   content:"\2605";
+}
+
+body{
+	padding-top:60px;
+}
+
+#add-button{
+	margin-bottom: 10px;
+}
