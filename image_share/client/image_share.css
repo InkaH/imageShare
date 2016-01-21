@@ -20,3 +20,7 @@ body{
 #add-button{
 	margin-bottom: 10px;
 }
+
+.single-img{
+	max-width:100%;
+}

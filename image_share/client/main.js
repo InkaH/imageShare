@@ -1,3 +1,42 @@
+///routing config
+
+//default template
+Router.configure({
+  layoutTemplate: 'applicationLayout'
+});
+
+//render welcome template to main
+Router.route('/', function () {
+  this.render('welcome', {
+    to:"main"
+  });
+});
+
+//render nav & images templates
+Router.route('/images', function () {
+  this.render('navbar', {
+    to:"navbar"
+  });
+  this.render('images', {
+    to:"main"
+  });
+});
+
+//render single image template with id variable coming in
+Router.route('/image/:_id', function () {
+  this.render('navbar', {
+    to:"navbar"
+  });
+  this.render('image', {
+    to:"main", 
+    data:function(){
+      //this.params refers to the parameters coming to this particular route
+      return Images.findOne({_id:this.params._id});
+    }
+  });
+});
+
+
 /*  var img_data = [
   {
     img_src:"rikkerakke.jpg",
@@ -27,6 +66,8 @@
   Template.images.onRendered(function(){
     console.log(Images.find().fetch());
   });*/
+  
+  ///scrolling 
 
   //set limit to how many images we query from the db at one time 
   Session.set("imageLimit", 8);
@@ -47,7 +88,7 @@
       lastScrollTop = scrollTop;
     }
   });
-  
+
   //configure the behaviour of {{>loginButtons}} by adding some fields
   //to the signup form
   Accounts.ui.config({
@@ -114,10 +155,10 @@
   //bind the event listener to the template - all elements in this template that have the class "js-image"
   // will have a listener that listens to clicks and executes the function after it
   Template.images.events({
-    //event listener for clicking on an image
+    /*//event listener for clicking on an image
     'click .js-image':function(event){
     $(event.target).css("width", "50px");
-    },
+    },*/
 
     //event listener for Delete button
     'click .js-del-image':function(event){
@@ -143,7 +184,7 @@
       Images.update({_id:image_id}, {$set: {rating:rating}});
     },
 
-    //event listener for the Add Image button
+    //event listener for Add Image button
     'click .js-show-image-form':function(event){
       $("#image_add_form").modal('show');
     },
